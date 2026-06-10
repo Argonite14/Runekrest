@@ -1,0 +1,147 @@
+@tailwind base;
+@tailwind components;
+@tailwind utilities;
+
+@layer base {
+  body {
+    background-color: #131315;
+    color: #e5e1e4;
+    font-family: 'DM Sans', sans-serif;
+  }
+}
+
+@layer utilities {
+  .glass-panel {
+    background: rgba(20, 20, 22, 0.6);
+    backdrop-filter: blur(12px);
+    border: 1px solid rgba(201, 168, 76, 0.3);
+  }
+
+  .glass-card {
+    background: rgba(19, 19, 21, 0.6);
+    backdrop-filter: blur(12px);
+    border: 1px solid rgba(201, 168, 76, 0.3);
+    transition: all 0.5s cubic-bezier(0.4, 0, 0.2, 1);
+  }
+  
+  .glass-card:hover {
+    border-color: rgba(201, 168, 76, 0.8);
+    transform: translateY(-4px);
+    box-shadow: 0 10px 30px -10px rgba(0, 0, 0, 0.5);
+  }
+
+  .technical-divider {
+    position: relative;
+    height: 1px;
+    background: rgba(201, 168, 76, 0.2);
+    width: 100%;
+  }
+  
+  .technical-divider::before, .technical-divider::after {
+    content: '';
+    position: absolute;
+    width: 1px;
+    height: 8px;
+    background: rgba(201, 168, 76, 0.5);
+    top: -4px;
+  }
+  
+  .technical-divider::before {
+    left: 0;
+  }
+  
+  .technical-divider::after {
+    right: 0;
+  }
+
+  .technical-ruler {
+    height: 1px;
+    background: linear-gradient(90deg, transparent 0%, rgba(201, 168, 76, 0.3) 50%, transparent 100%);
+    position: relative;
+  }
+  
+  .technical-ruler::before, .technical-ruler::after {
+    content: '';
+    position: absolute;
+    top: -2px;
+    width: 1px;
+    height: 5px;
+    background: #e6c364;
+  }
+  
+  .technical-ruler::before {
+    left: 0;
+  }
+  
+  .technical-ruler::after {
+    right: 0;
+  }
+
+  .ruler-mark {
+    height: 4px;
+    width: 1px;
+    background: rgba(201, 168, 76, 0.5);
+    transition: all 0.2s ease;
+  }
+
+  .gold-glow:hover {
+    box-shadow: 0 0 20px rgba(201, 168, 76, 0.2);
+  }
+
+  .btn-primary {
+    position: relative;
+    overflow: hidden;
+    border: 1px solid #C9A84C;
+    color: #C9A84C;
+    transition: all 0.4s cubic-bezier(0.165, 0.84, 0.44, 1);
+  }
+  
+  .btn-primary:hover {
+    background: linear-gradient(180deg, #C9A84C 0%, #A68A3E 100%);
+    color: #0C0C0E;
+  }
+
+  .noise-bg {
+    background-image: url("https://www.transparenttextures.com/patterns/carbon-fibre.png");
+    opacity: 0.03;
+    position: absolute;
+    inset: 0;
+    pointer-events: none;
+  }
+
+  .parchment-texture {
+    background-image: url("https://www.transparenttextures.com/patterns/natural-paper.png");
+    opacity: 0.1;
+    position: absolute;
+    inset: 0;
+    pointer-events: none;
+  }
+
+  .scroll-hide::-webkit-scrollbar {
+    display: none;
+  }
+  
+  .scroll-hide {
+    -ms-overflow-style: none;
+    scrollbar-width: none;
+  }
+
+  .scroll-reveal {
+    opacity: 0;
+    transform: translateY(20px);
+    transition: all 0.8s cubic-bezier(0.16, 1, 0.3, 1);
+  }
+  
+  .scroll-reveal.active {
+    opacity: 1;
+    transform: translateY(0);
+  }
+
+  .technical-grid {
+    background-image: 
+      linear-gradient(to right, rgba(201, 168, 76, 0.05) 1px, transparent 1px),
+      linear-gradient(to bottom, rgba(201, 168, 76, 0.05) 1px, transparent 1px);
+    background-size: 40px 40px;
+    transition: transform 0.1s ease-out;
+  }
+}
