@@ -36,7 +36,7 @@ export default function Home() {
 
   const handleScroll = (direction) => {
     if (scrollRef.current) {
-      const scrollAmount = direction === 'left' ? -440 : 440;
+      const scrollAmount = direction === 'left' ? -390 : 390;
       scrollRef.current.scrollBy({ left: scrollAmount, behavior: 'smooth' });
     }
   };
@@ -92,74 +92,76 @@ export default function Home() {
 
       {/* Featured Products */}
       <section className="py-24 bg-surface overflow-hidden relative">
-        <div className="px-6 md:px-margin-desktop max-w-container-max mx-auto mb-16 flex justify-between items-end">
-          <div>
-            <span className="font-label-technical text-primary uppercase tracking-[0.3em] block mb-2 text-xs">Technical Artifacts</span>
-            <h2 className="font-headline-lg text-headline-lg text-on-surface">Curated Selection</h2>
+        <div className="px-6 md:px-margin-desktop max-w-container-max mx-auto mb-12 text-center">
+          <span className="font-label-technical text-primary uppercase tracking-[0.3em] block mb-2 text-xs">Technical Artifacts</span>
+          <h2 className="font-headline-lg text-headline-lg text-on-surface">Curated Selection</h2>
+        </div>
+
+        <div className="px-6 md:px-margin-desktop max-w-container-max mx-auto">
+          <div
+            ref={scrollRef}
+            className="flex gap-gutter overflow-x-auto scroll-hide pb-4 scroll-smooth snap-x snap-mandatory"
+          >
+            {featuredProducts.map((product) => (
+              <div
+                key={product.id}
+                onClick={() => !product.locked && navigate(`/archives?id=${product.id}`)}
+                className="min-w-[280px] md:min-w-[320px] md:w-[calc((100%-48px)/3)] glass-panel group cursor-pointer relative overflow-hidden flex-shrink-0 snap-start"
+              >
+                {product.locked ? (
+                  <div className="aspect-[4/5] overflow-hidden p-6 bg-surface-container flex items-center justify-center">
+                    <div className="text-center">
+                      <span className="material-symbols-outlined text-6xl text-outline/30 mb-4 select-none">lock</span>
+                      <p className="font-label-technical text-outline/40 uppercase tracking-widest text-xs">Decryption Required</p>
+                    </div>
+                  </div>
+                ) : (
+                  <div className="aspect-[4/5] overflow-hidden p-6">
+                    <img
+                      alt={product.title}
+                      className="w-full h-full object-cover transition-transform duration-700 group-hover:scale-110 grayscale group-hover:grayscale-0"
+                      src={product.img}
+                    />
+                  </div>
+                )}
+                
+                <div className="p-8 border-t border-glass-stroke">
+                  <div className="flex justify-between items-start mb-4">
+                    <div>
+                      <span className="font-label-technical text-[10px] text-outline uppercase tracking-widest">{product.type}</span>
+                      <h3 className="font-headline-lg text-xl md:text-2xl text-on-surface mt-1">{product.title}</h3>
+                    </div>
+                    <span className="font-label-technical text-primary text-base md:text-lg">{product.price}</span>
+                  </div>
+                  <div className="technical-divider mb-6"></div>
+                  <div className="flex justify-between items-center">
+                    <span className="font-label-technical text-[10px] text-on-surface-variant uppercase">{product.tag}</span>
+                    <span className="material-symbols-outlined text-primary text-xl select-none">
+                      {product.locked ? 'lock_open' : 'arrow_forward_ios'}
+                    </span>
+                  </div>
+                </div>
+              </div>
+            ))}
           </div>
-          <div className="flex gap-4">
+
+          {/* Centered Scroll Navigation Arrows */}
+          <div className="flex justify-center items-center gap-4 mt-10">
             <button
               onClick={() => handleScroll('left')}
-              className="p-2 border border-glass-stroke text-primary hover:bg-primary/10 transition-colors duration-300"
+              className="p-3 border border-glass-stroke text-primary hover:bg-primary/10 transition-colors duration-300 flex items-center justify-center"
               aria-label="Scroll Left"
             >
               <span className="material-symbols-outlined select-none">chevron_left</span>
             </button>
             <button
               onClick={() => handleScroll('right')}
-              className="p-2 border border-glass-stroke text-primary hover:bg-primary/10 transition-colors duration-300"
+              className="p-3 border border-glass-stroke text-primary hover:bg-primary/10 transition-colors duration-300 flex items-center justify-center"
               aria-label="Scroll Right"
             >
               <span className="material-symbols-outlined select-none">chevron_right</span>
             </button>
           </div>
-        </div>
-
-        <div
-          ref={scrollRef}
-          className="pl-6 md:pl-margin-desktop flex gap-gutter overflow-x-auto scroll-hide pb-8 scroll-smooth"
-        >
-          {featuredProducts.map((product) => (
-            <div
-              key={product.id}
-              onClick={() => !product.locked && navigate(`/archives?id=${product.id}`)}
-              className="min-w-[300px] md:min-w-[420px] glass-panel group cursor-pointer relative overflow-hidden flex-shrink-0"
-            >
-              {product.locked ? (
-                <div className="aspect-[4/5] overflow-hidden p-6 bg-surface-container flex items-center justify-center">
-                  <div className="text-center">
-                    <span className="material-symbols-outlined text-6xl text-outline/30 mb-4 select-none">lock</span>
-                    <p className="font-label-technical text-outline/40 uppercase tracking-widest text-xs">Decryption Required</p>
-                  </div>
-                </div>
-              ) : (
-                <div className="aspect-[4/5] overflow-hidden p-6">
-                  <img
-                    alt={product.title}
-                    className="w-full h-full object-cover transition-transform duration-700 group-hover:scale-110 grayscale group-hover:grayscale-0"
-                    src={product.img}
-                  />
-                </div>
-              )}
-              
-              <div className="p-8 border-t border-glass-stroke">
-                <div className="flex justify-between items-start mb-4">
-                  <div>
-                    <span className="font-label-technical text-[10px] text-outline uppercase tracking-widest">{product.type}</span>
-                    <h3 className="font-headline-lg text-xl md:text-2xl text-on-surface mt-1">{product.title}</h3>
-                  </div>
-                  <span className="font-label-technical text-primary text-base md:text-lg">{product.price}</span>
-                </div>
-                <div className="technical-divider mb-6"></div>
-                <div className="flex justify-between items-center">
-                  <span className="font-label-technical text-[10px] text-on-surface-variant uppercase">{product.tag}</span>
-                  <span className="material-symbols-outlined text-primary text-xl select-none">
-                    {product.locked ? 'lock_open' : 'arrow_forward_ios'}
-                  </span>
-                </div>
-              </div>
-            </div>
-          ))}
         </div>
       </section>
 

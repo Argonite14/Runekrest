@@ -38,11 +38,21 @@
 }
 
 /* Base Styles */
+html {
+  scroll-snap-type: y proximity;
+  scroll-behavior: smooth;
+  scroll-padding-top: 80px;
+}
+
 body {
   background-color: #131315;
   color: #e5e1e4;
   font-family: 'DM Sans', sans-serif;
   min-height: 100dvh;
+}
+
+section, header, footer {
+  scroll-snap-align: start;
 }
 
 #root {
